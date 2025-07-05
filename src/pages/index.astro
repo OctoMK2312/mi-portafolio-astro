@@ -1,16 +1,81 @@
 ---
+import Layout from "../layouts/layout.astro";
 
+import { Icon } from "astro-icon/components";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="Inicio | Portafolio de Miguel Betzay Dominguez"
+  description="Desarrollador web apasionado por crear soluciones eficientes y elegantes. Bienvenido a mi portafolio."
+>
+  <section class="animate-fade-in-up items-center">
+    <div class="grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-20">
+      <div class="flex flex-col gap-6">
+        <div
+          class="inline-block w-auto rounded-full bg-sky-900/40 px-3 py-1 text-sm font-medium text-sky-300"
+        >
+          Desarrollador Web Full-Stack
+        </div>
+
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+          Hola, soy Miguel Betzay Dominguez
+        </h1>
+
+        <p class="max-w-prose text-lg text-neutral-300">
+          Apasionado por transformar ideas en soluciones web eficientes y
+          elegantes. Bienvenido a mi espacio digital donde la tecnología se
+          encuentra con la creatividad.
+        </p>
+
+        <div class="mt-4 flex flex-wrap gap-4">
+          <a
+            href="/proyectos"
+            class="inline-flex items-center gap-2 rounded-lg bg-sky-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-neutral-900"
+          >
+            Ver mis proyectos
+          </a>
+          <a
+            href="/contacto"
+            class="inline-flex items-center gap-2 rounded-lg border-2 border-neutral-700 px-6 py-3 font-semibold text-neutral-200 transition-colors hover:border-neutral-600 hover:bg-neutral-800"
+          >
+            Contactarme <Icon name="mdi:arrow-right" class="inline-block" />
+          </a>
+        </div>
+
+        <div class="mt-6 flex gap-4">
+          <a
+            href="https://github.com/OctoMK2312"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-neutral-400 transition hover:text-white"
+            aria-label="GitHub"
+          >
+            <Icon name="mdi:github" class="inline-block" />
+          </a>
+          <a
+            href="https://linkedin.com/in/tu_usuario"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-neutral-400 transition hover:text-white"
+            aria-label="LinkedIn"
+          >
+          </a>
+        </div>
+      </div>
+
+      <div class="relative hidden md:block">
+        <div
+          class="absolute inset-0 z-0 -translate-x-4 translate-y-4 rounded-3xl bg-gradient-to-br from-sky-600 to-cyan-800 opacity-30 blur-3xl"
+        >
+        </div>
+        <img
+          src="/images/codeAvatar.png"
+          alt="Avatar de Miguel Betzay Dominguez"
+          class="relative z-10 h-auto w-full max-w-sm rounded-3xl object-cover shadow-2xl"
+          width="400"
+          height="400"
+        />
+      </div>
+    </div>
+  </section>
+</Layout>

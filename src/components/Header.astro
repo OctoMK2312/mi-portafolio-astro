@@ -1,0 +1,116 @@
+---
+const navLinks = [
+  { href: "/proyectos", text: "Proyectos" },
+  { href: "/sobre-mi", text: "Sobre Mí" },
+  { href: "/contacto", text: "Contacto" },
+];
+
+const pathname = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 w-full bg-neutral-950/80 backdrop-blur-lg">
+  <div class="mx-auto max-w-5xl px-6">
+    <div class="flex h-16 items-center justify-between">
+      <a href="/" class="group text-xl font-bold text-white">
+        Miguel Betzay Dominguez Diaz
+        <span
+          class="block h-0.5 max-w-0 bg-sky-400 transition-all duration-500 group-hover:max-w-full"
+        ></span>
+      </a>
+
+      <nav class="hidden items-center gap-8 md:flex">
+        {
+          navLinks.map((link) => {
+            const isActive =
+              pathname === link.href ||
+              (link.href !== "/" && pathname.startsWith(link.href));
+            return (
+              <a
+                href={link.href}
+                class:list={[
+                  "relative text-neutral-300 transition-colors duration-300 hover:text-sky-300",
+                  { "text-sky-400": isActive },
+                ]}
+              >
+                {link.text}
+                {isActive && (
+                  <span class="absolute -bottom-1 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-sky-400" />
+                )}
+              </a>
+            );
+          })
+        }
+      </nav>
+
+      <div class="md:hidden">
+        <button
+          id="menu-btn"
+          class="group relative z-50 h-8 w-8"
+          aria-label="Abrir menú"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <div
+            class="absolute left-1/2 top-1/2 flex w-6 -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-[6px] transition-all duration-300"
+          >
+            <div
+              class="h-0.5 w-full transform rounded-full bg-white transition-all duration-300 group-[.is-open]:-rotate-45 group-[.is-open]:translate-y-[8px]"
+            >
+            </div>
+            <div
+              class="h-0.5 w-full rounded-full bg-white transition-all duration-300 group-[.is-open]:opacity-0"
+            >
+            </div>
+            <div
+              class="h-0.5 w-full transform rounded-full bg-white transition-all duration-300 group-[.is-open]:rotate-45 group-[.is-open]:-translate-y-[8px]"
+            >
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="pointer-events-none absolute w-full -translate-y-4 opacity-0 transition-all duration-300 ease-out md:hidden"
+  >
+    <div
+      class="flex flex-col items-center gap-8 bg-black/90 py-8 backdrop-blur-xl"
+    >
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-lg text-white transition-colors hover:text-sky-300"
+          >
+            {link.text}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</header>
+
+<script>
+  const menuBtn = document.getElementById("menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  menuBtn?.addEventListener("click", () => {
+    // 1. Alternar la clase en el botón para la animación del icono
+    menuBtn.classList.toggle("is-open");
+
+    // 2. Alternar estado ARIA para accesibilidad
+    const isExpanded = menuBtn.getAttribute("aria-expanded") === "true";
+    menuBtn.setAttribute("aria-expanded", (!isExpanded).toString());
+    menuBtn.setAttribute(
+      "aria-label",
+      isExpanded ? "Abrir menú" : "Cerrar menú"
+    );
+
+    // 3. Alternar clases de animación en el menú
+    mobileMenu?.classList.toggle("opacity-0");
+    mobileMenu?.classList.toggle("-translate-y-4");
+    mobileMenu?.classList.toggle("pointer-events-none");
+  });
+</script>
