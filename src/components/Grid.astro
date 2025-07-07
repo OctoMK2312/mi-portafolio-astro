@@ -1,0 +1,56 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Cols = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+type Gap = number;
+
+interface Props extends HTMLAttributes<"div"> {
+  as?: keyof HTMLElementTagNameMap;
+  cols?: Cols;
+  sm?: Cols;
+  md?: Cols;
+  lg?: Cols;
+  xl?: Cols;
+  gap?: Gap;
+  smGap?: Gap;
+  mdGap?: Gap;
+  lgGap?: Gap;
+  xlGap?: Gap;
+  class?: string;
+}
+
+const {
+  as: Tag = "div",
+  cols,
+  sm,
+  md,
+  lg,
+  xl,
+  gap,
+  smGap,
+  mdGap,
+  lgGap,
+  xlGap,
+  class: customClass,
+  ...rest
+} = Astro.props;
+
+const classes = [
+  "grid",
+  cols && `grid-cols-${cols}`,
+  sm && `sm:grid-cols-${sm}`,
+  md && `md:grid-cols-${md}`,
+  lg && `lg:grid-cols-${lg}`,
+  xl && `xl:grid-cols-${xl}`,
+  gap && `gap-${gap}`,
+  smGap && `sm:gap-${smGap}`,
+  mdGap && `md:gap-${mdGap}`,
+  lgGap && `lg:gap-${lgGap}`,
+  xlGap && `xl:gap-${xlGap}`,
+  customClass,
+];
+---
+
+<Tag class:list={classes} {...rest}>
+  <slot />
+</Tag>

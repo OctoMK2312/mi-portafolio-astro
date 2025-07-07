@@ -1,0 +1,57 @@
+---
+import { Icon } from "astro-icon/components";
+
+const socialLinks = [
+  {
+    href: "https://github.com/OctoMK2312",
+    label: "GitHub",
+    icon: "mdi:github",
+  },
+  {
+    href: "https://linkedin.com/in/tu_usuario", // ¡No olvides actualizar esto!
+    label: "LinkedIn",
+    icon: "mdi:linkedin",
+  },
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-neutral-900 text-neutral-400">
+  <div class="mx-auto max-w-5xl px-6 py-16">
+    <div class="grid md:grid-cols-2 gap-12">
+      <div class="md:pr-8">
+        <h3 class="text-xl font-bold text-white mb-4">
+          Miguel Betzay Dominguez Diaz
+        </h3>
+        <p class="text-sm">
+          Un desarrollador apasionado por crear experiencias web intuitivas y
+          atractivas.
+        </p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-white mb-4">Conéctate Conmigo</h3>
+        <div class="flex gap-5">
+          {
+            socialLinks.map((link) => (
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-neutral-400 transition hover:text-white hover:scale-110"
+                aria-label={link.label}
+              >
+                <Icon name={link.icon} class="h-8 w-8" />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class="mt-12 border-t border-neutral-800 pt-8 text-center text-sm">
+      <p>
+        &copy; {currentYear} Miguel Betzay Dominguez Diaz. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>

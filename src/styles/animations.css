@@ -1,0 +1,45 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/*
+  Uso de variables CSS para controlar la animación desde el componente.
+  Esto permite reutilizar las clases de animación con diferentes duraciones y retardos.
+*/
+[class*="animate-"] {
+  animation-duration: var(--animation-duration, 800ms);
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+  animation-delay: var(--animation-delay, 0s);
+}
+
+.animate-fade-in { animation-name: fade-in; }
+.animate-fade-in-up { animation-name: fade-in-up; }
+.animate-slide-in-left { animation-name: slide-in-left; }

@@ -1,0 +1,68 @@
+---
+import { Icon } from "astro-icon/components";
+import type { HTMLAttributes } from "astro/types";
+
+type Variant = "primary" | "secondary";
+type Size = "sm" | "md" | "lg";
+type IconPosition = "left" | "right";
+
+interface Props extends HTMLAttributes<"a"> {
+  href: string;
+  text: string;
+  variant?: Variant;
+  size?: Size;
+  iconName?: string;
+  iconPosition?: IconPosition;
+  class?: string;
+}
+
+const {
+  href,
+  text,
+  variant = "primary",
+  size = "md",
+  iconName,
+  iconPosition = "right",
+  class: customClass,
+  ...rest
+} = Astro.props;
+
+const baseClasses =
+  "inline-flex items-center gap-2 rounded-lg font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-900";
+
+const sizeClasses: Record<Size, string> = {
+  sm: "px-4 py-2 text-sm",
+  md: "px-6 py-3",
+  lg: "px-8 py-4 text-lg",
+};
+
+const variantClasses: Record<Variant, string> = {
+  primary:
+    "bg-sky-500 dark:bg-sky-900 text-white hover:bg-sky-600 focus:ring-sky-400",
+  secondary:
+    "border-2 border-neutral-700 text-neutral-700 dark:text-neutral-200 dark:border-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:ring-neutral-400",
+};
+---
+
+<a
+  href={href}
+  class:list={[
+    baseClasses,
+    sizeClasses[size],
+    variantClasses[variant],
+    customClass,
+  ]}
+  {...rest}
+>
+  {
+    iconName && iconPosition === "left" && (
+      <Icon name={iconName} class="inline-block" />
+    )
+  }
+  <span>{text}</span>
+  {
+    iconName && iconPosition === "right" && (
+      <Icon name={iconName} class="inline-block" />
+    )
+  }
+</a>

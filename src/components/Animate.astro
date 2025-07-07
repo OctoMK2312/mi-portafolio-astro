@@ -1,0 +1,39 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Animation = "fade-in" | "fade-in-up" | "slide-in-left";
+
+interface Props extends HTMLAttributes<"div"> {
+  as?: keyof HTMLElementTagNameMap;
+  animation?: Animation;
+  duration?: string;
+  delay?: string;
+  class?: string;
+}
+
+const {
+  as: Tag = "div",
+  animation,
+  duration,
+  delay,
+  class: customClass,
+  ...rest
+} = Astro.props;
+
+const animationClass = animation ? `animate-${animation}` : "";
+
+const inlineStyles = [
+  duration ? `--animation-duration: ${duration}` : null,
+  delay ? `--animation-delay: ${delay}` : null,
+]
+  .filter(Boolean)
+  .join("; ");
+---
+
+<Tag
+  class:list={[animationClass, customClass]}
+  style={inlineStyles || undefined}
+  {...rest}
+>
+  <slot />
+</Tag>

@@ -1,16 +1,15 @@
 ---
-// Importamos el Header y un nuevo componente Footer que crearemos
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 
 import "../styles/global.css";
+import "../styles/animations.css";
 
-// Definimos las propiedades que el layout aceptará
 export interface Props {
   title: string;
-  description: string; // <-- Añadimos 'description' para SEO
+  description: string;
 }
 
-// Obtenemos las props con valores por defecto para seguridad
 const {
   title = "Título por defecto",
   description = "Descripción por defecto de mi sitio web.",
@@ -35,15 +34,8 @@ const {
     />
   </head>
   <body
-    class="min-h-screen bg-neutral-900 text-neutral-100 font-inter antialiased"
+    class="min-h-screen bg-white dark:bg-neutral-900 dark:text-neutral-800 antialiased"
   >
-    <a
-      href="#main-content"
-      class="absolute left-0 top-0 z-[9999] m-3 -translate-y-16 bg-neutral-800 p-3 text-white transition focus:translate-y-0"
-    >
-      Saltar al contenido principal
-    </a>
-
     <Header />
 
     <main id="main-content">
@@ -51,5 +43,7 @@ const {
         <slot />
       </div>
     </main>
+
+    <Footer />
   </body>
 </html>
