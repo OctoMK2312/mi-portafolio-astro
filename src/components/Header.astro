@@ -8,10 +8,15 @@ const navLinks = [
 const pathname = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 w-full bg-neutral-950/80 backdrop-blur-lg">
+<header
+  class="sticky top-0 z-50 w-full bg-neutral-400/40 dark:bg-neutral-800/80 backdrop-blur-lg"
+>
   <div class="mx-auto max-w-5xl px-6">
     <div class="flex h-16 items-center justify-between">
-      <a href="/" class="group text-xl font-bold text-white">
+      <a
+        href="/"
+        class="group text-xl font-bold text-neutral-800 dark:text-white"
+      >
         Miguel Betzay Dominguez Diaz
         <span
           class="block h-0.5 max-w-0 bg-sky-400 transition-all duration-500 group-hover:max-w-full"
@@ -116,10 +121,8 @@ const pathname = Astro.url.pathname;
   const mobileMenu = document.getElementById("mobile-menu");
 
   menuBtn?.addEventListener("click", () => {
-    // 1. Alternar la clase en el botón para la animación del icono
     menuBtn.classList.toggle("is-open");
 
-    // 2. Alternar estado ARIA para accesibilidad
     const isExpanded = menuBtn.getAttribute("aria-expanded") === "true";
     menuBtn.setAttribute("aria-expanded", (!isExpanded).toString());
     menuBtn.setAttribute(
@@ -127,7 +130,6 @@ const pathname = Astro.url.pathname;
       isExpanded ? "Abrir menú" : "Cerrar menú"
     );
 
-    // 3. Alternar clases de animación en el menú
     mobileMenu?.classList.toggle("opacity-0");
     mobileMenu?.classList.toggle("-translate-y-4");
     mobileMenu?.classList.toggle("pointer-events-none");
