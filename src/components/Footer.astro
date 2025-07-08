@@ -1,57 +1,128 @@
 ---
 import { Icon } from "astro-icon/components";
 
+const myEmail = "al221910421@gmail.com";
+
 const socialLinks = [
   {
     href: "https://github.com/OctoMK2312",
     label: "GitHub",
     icon: "mdi:github",
   },
-  {
-    href: "https://linkedin.com/in/tu_usuario", // ¡No olvides actualizar esto!
-    label: "LinkedIn",
-    icon: "mdi:linkedin",
-  },
 ];
 
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-neutral-900 text-neutral-400">
-  <div class="mx-auto max-w-5xl px-6 py-16">
-    <div class="grid md:grid-cols-2 gap-12">
-      <div class="md:pr-8">
-        <h3 class="text-xl font-bold text-white mb-4">
+<footer
+  class="border-t border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900"
+>
+  <div class="mx-auto max-w-5xl px-6 py-12">
+    <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
+      <div>
+        <h3
+          class="mb-2 text-xl font-bold text-neutral-900 dark:text-neutral-100"
+        >
           Miguel Betzay Dominguez Diaz
         </h3>
-        <p class="text-sm">
+        <p class="text-neutral-600 dark:text-neutral-400">
           Un desarrollador apasionado por crear experiencias web intuitivas y
           atractivas.
         </p>
       </div>
-      <div>
-        <h3 class="text-lg font-semibold text-white mb-4">Conéctate Conmigo</h3>
-        <div class="flex gap-5">
+
+      <div class="md:text-right">
+        <h3
+          class="mb-4 text-lg font-semibold text-neutral-800 dark:text-neutral-200"
+        >
+          Contacto
+        </h3>
+        <div class="flex items-center justify-start gap-6 md:justify-end">
+          <div id="email-container" class="relative flex items-center">
+            <span
+              id="email-text"
+              class="mr-3 text-neutral-600 dark:text-neutral-400"
+            >
+              {myEmail}
+            </span>
+            <button
+              id="copy-button"
+              class="group relative rounded-full bg-neutral-200 p-2 text-neutral-600 transition hover:bg-neutral-300 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700"
+              aria-label="Copiar correo"
+            >
+              <span
+                id="copy-feedback"
+                class="pointer-events-none absolute right-full top-1/2 mr-2 -translate-y-1/2 whitespace-nowrap rounded-md bg-neutral-800 px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-neutral-700"
+              >
+                Copiado!
+              </span>
+              <Icon
+                id="copy-icon"
+                name="mdi:content-copy"
+                class="h-5 w-5 transition-transform duration-300 group-active:scale-90"
+              />
+              <Icon
+                id="success-icon"
+                name="mdi:check-circle-outline"
+                class="absolute inset-0 m-auto h-5 w-5 scale-0 text-sky-500 transition-transform duration-300"
+              />
+            </button>
+          </div>
           {
             socialLinks.map((link) => (
               <a
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-neutral-400 transition hover:text-white hover:scale-110"
+                class="text-neutral-500 transition duration-300 hover:scale-110 hover:text-sky-500 dark:text-neutral-400 dark:hover:text-sky-400"
                 aria-label={link.label}
               >
-                <Icon name={link.icon} class="h-8 w-8" />
+                <Icon name={link.icon} class="h-7 w-7" />
               </a>
             ))
           }
         </div>
       </div>
     </div>
-    <div class="mt-12 border-t border-neutral-800 pt-8 text-center text-sm">
+
+    <div
+      class="mt-12 border-t border-neutral-200 pt-8 text-center text-sm text-neutral-500 dark:border-neutral-800 dark:text-neutral-500"
+    >
       <p>
         &copy; {currentYear} Miguel Betzay Dominguez Diaz. Todos los derechos reservados.
       </p>
     </div>
   </div>
 </footer>
+
+<script define:vars={{ myEmail }}>
+  const copyButton = document.getElementById("copy-button");
+  const emailContainer = document.getElementById("email-container");
+
+  if (copyButton && emailContainer) {
+    const copyIcon = document.getElementById("copy-icon");
+    const successIcon = document.getElementById("success-icon");
+    const copyFeedback = document.getElementById("copy-feedback");
+
+    copyButton.addEventListener("click", () => {
+      navigator.clipboard
+        .writeText(myEmail)
+        .then(() => {
+          // Mostrar feedback visual
+          copyIcon.style.transform = "scale(0)";
+          successIcon.style.transform = "scale(1)";
+          copyFeedback.style.opacity = "1";
+
+          // Resetear después de 2 segundos
+          setTimeout(() => {
+            copyIcon.style.transform = "scale(1)";
+            successIcon.style.transform = "scale(0)";
+            copyFeedback.style.opacity = "0";
+          }, 2000);
+        })
+        .catch((err) => {
+          console.error("Error al copiar el correo: ", err);
+        });
+    });
+  }
+</script>

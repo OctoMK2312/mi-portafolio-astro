@@ -12,7 +12,7 @@ import { Image } from "astro:assets";
   description="Desarrollador web apasionado por crear soluciones eficientes y elegantes. Bienvenido a mi portafolio."
 >
   <section class="items-center">
-    <Grid cols={2} md={2} gap={12} lgGap={20} class="items-center">
+    <Grid cols={1} md={2} gap={20} lgGap={20} class="items-center">
       <div class="flex flex-col gap-6">
         <Animate animation="fade-in" duration="500ms">
           <Chip text="Desarrollador Web Full-Stack" />
@@ -82,8 +82,7 @@ import { Image } from "astro:assets";
 </Layout>
 
 <style>
-  /* Estilo opcional para que la animación del título sea más dramática */
   h1 span:last-child {
-    -webkit-text-fill-color: transparent; /* Safari */
+    -webkit-text-fill-color: transparent;
   }
 </style>

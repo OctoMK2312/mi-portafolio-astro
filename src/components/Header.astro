@@ -9,17 +9,17 @@ const pathname = Astro.url.pathname;
 ---
 
 <header
-  class="sticky top-0 z-50 w-full bg-neutral-400/40 dark:bg-neutral-800/80 backdrop-blur-lg"
+  class="sticky top-0 z-50 w-full border-b border-neutral-200/80 bg-white/80 backdrop-blur-lg dark:border-neutral-800/80 dark:bg-neutral-900/80"
 >
   <div class="mx-auto max-w-5xl px-6">
     <div class="flex h-16 items-center justify-between">
       <a
         href="/"
-        class="group text-xl font-bold text-neutral-800 dark:text-white"
+        class="group text-xl font-bold text-neutral-900 transition-colors duration-300 hover:text-sky-500 dark:text-neutral-100 dark:hover:text-sky-400"
       >
         Miguel Betzay Dominguez Diaz
         <span
-          class="block h-0.5 max-w-0 bg-sky-400 transition-all duration-500 group-hover:max-w-full"
+          class="block h-0.5 max-w-0 bg-sky-500 transition-all duration-500 group-hover:max-w-full dark:bg-sky-400"
         ></span>
       </a>
 
@@ -28,28 +28,28 @@ const pathname = Astro.url.pathname;
           navLinks.map((link) => {
             if (link.disabled) {
               return (
-                <a
-                  class="text-neutral-500 cursor-not-allowed opacity-60"
+                <span
+                  class="cursor-not-allowed text-lg font-medium text-neutral-400 dark:text-neutral-600"
                   aria-disabled="true"
                 >
                   {link.text}
-                </a>
+                </span>
               );
             }
             const isActive =
-              pathname === link.href || // Exact match for the current page
+              pathname === link.href ||
               (link.href !== "/" && pathname.startsWith(link.href));
             return (
               <a
                 href={link.href}
                 class:list={[
-                  "relative text-neutral-300 transition-colors duration-300 hover:text-sky-300",
-                  { "text-sky-400": isActive },
+                  "relative text-lg font-medium text-neutral-700 transition-colors duration-300 hover:text-sky-500 dark:text-neutral-300 dark:hover:text-sky-400",
+                  { "font-semibold text-sky-500 dark:text-sky-400": isActive },
                 ]}
               >
                 {link.text}
                 {isActive && (
-                  <span class="absolute -bottom-1 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-sky-400" />
+                  <span class="absolute -bottom-2 left-1/2 h-1 w-5 -translate-x-1/2 rounded-full bg-sky-500 dark:bg-sky-400" />
                 )}
               </a>
             );
@@ -60,24 +60,24 @@ const pathname = Astro.url.pathname;
       <div class="md:hidden">
         <button
           id="menu-btn"
-          class="group relative z-50 h-8 w-8"
+          class="group relative z-50 h-10 w-10 rounded-full bg-neutral-100 p-2 transition-colors hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
           aria-label="Abrir menú"
           aria-controls="mobile-menu"
           aria-expanded="false"
         >
           <div
-            class="absolute left-1/2 top-1/2 flex w-6 -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-[6px] transition-all duration-300"
+            class="absolute left-1/2 top-1/2 flex w-5 -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-y-1.5 transition-all duration-300"
           >
             <div
-              class="h-0.5 w-full transform rounded-full bg-white transition-all duration-300 group-[.is-open]:-rotate-45 group-[.is-open]:translate-y-[8px]"
+              class="h-0.5 w-full transform rounded-full bg-neutral-800 transition-all duration-300 group-[.is-open]:-rotate-45 group-[.is-open]:translate-y-[calc(1.5px+0.25rem)] dark:bg-neutral-200"
             >
             </div>
             <div
-              class="h-0.5 w-full rounded-full bg-white transition-all duration-300 group-[.is-open]:opacity-0"
+              class="h-0.5 w-full rounded-full bg-neutral-800 opacity-100 transition-all duration-300 group-[.is-open]:opacity-0 dark:bg-neutral-200"
             >
             </div>
             <div
-              class="h-0.5 w-full transform rounded-full bg-white transition-all duration-300 group-[.is-open]:rotate-45 group-[.is-open]:-translate-y-[8px]"
+              class="h-0.5 w-full transform rounded-full bg-neutral-800 transition-all duration-300 group-[.is-open]:rotate-45 group-[.is-open]:-translate-y-[calc(1.5px+0.25rem)] dark:bg-neutral-200"
             >
             </div>
           </div>
@@ -88,30 +88,35 @@ const pathname = Astro.url.pathname;
 
   <div
     id="mobile-menu"
-    class="pointer-events-none absolute w-full -translate-y-4 opacity-0 transition-all duration-300 ease-out md:hidden"
+    class="pointer-events-none absolute w-full translate-y-[-1rem] opacity-0 transition-all duration-300 ease-out md:hidden"
   >
     <div
-      class="flex flex-col items-center gap-8 bg-black/90 py-8 backdrop-blur-xl"
+      class="border-t border-neutral-200/80 bg-white/95 py-8 px-6 shadow-xl dark:border-neutral-800/80 dark:bg-neutral-900/95"
+      aria-labelledby="menu-btn"
+      role="menu"
     >
-      {
-        navLinks.map((link) =>
-          link.disabled ? (
-            <span
-              class="text-lg text-neutral-500 cursor-not-allowed opacity-60"
-              aria-disabled="true"
-            >
-              {link.text}
-            </span>
-          ) : (
-            <a
-              href={link.href}
-              class="text-lg text-white transition-colors hover:text-sky-300"
-            >
-              {link.text}
-            </a>
+      <nav class="flex flex-col items-center gap-8">
+        {
+          navLinks.map((link) =>
+            link.disabled ? (
+              <span
+                class="cursor-not-allowed text-xl font-medium text-neutral-400 dark:text-neutral-600"
+                aria-disabled="true"
+              >
+                {link.text}
+              </span>
+            ) : (
+              <a
+                href={link.href}
+                class="text-xl font-medium text-neutral-800 transition-colors hover:text-sky-500 dark:text-neutral-200 dark:hover:text-sky-400"
+                role="menuitem"
+              >
+                {link.text}
+              </a>
+            )
           )
-        )
-      }
+        }
+      </nav>
     </div>
   </div>
 </header>
@@ -120,18 +125,16 @@ const pathname = Astro.url.pathname;
   const menuBtn = document.getElementById("menu-btn");
   const mobileMenu = document.getElementById("mobile-menu");
 
-  menuBtn?.addEventListener("click", () => {
-    menuBtn.classList.toggle("is-open");
+  function toggleMenu() {
+    if (!menuBtn || !mobileMenu) return;
+    const isOpen = menuBtn.classList.toggle("is-open");
+    menuBtn.setAttribute("aria-expanded", String(isOpen));
+    menuBtn.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
 
-    const isExpanded = menuBtn.getAttribute("aria-expanded") === "true";
-    menuBtn.setAttribute("aria-expanded", (!isExpanded).toString());
-    menuBtn.setAttribute(
-      "aria-label",
-      isExpanded ? "Abrir menú" : "Cerrar menú"
-    );
+    mobileMenu.classList.toggle("opacity-0", !isOpen);
+    mobileMenu.classList.toggle("translate-y-[-1rem]", !isOpen);
+    mobileMenu.classList.toggle("pointer-events-none", !isOpen);
+  }
 
-    mobileMenu?.classList.toggle("opacity-0");
-    mobileMenu?.classList.toggle("-translate-y-4");
-    mobileMenu?.classList.toggle("pointer-events-none");
-  });
+  menuBtn?.addEventListener("click", toggleMenu);
 </script>
