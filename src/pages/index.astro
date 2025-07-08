@@ -4,7 +4,6 @@ import Button from "../components/Button.astro";
 import Animate from "../components/Animate.astro";
 import Grid from "../components/Grid.astro";
 import Chip from "../components/Chip.astro";
-
 import { Image } from "astro:assets";
 ---
 
@@ -12,52 +11,79 @@ import { Image } from "astro:assets";
   title="Inicio | Portafolio de Miguel Betzay Dominguez"
   description="Desarrollador web apasionado por crear soluciones eficientes y elegantes. Bienvenido a mi portafolio."
 >
-  <Animate
-    as="section"
-    animation="fade-in-up"
-    duration="800ms"
-    class="items-center"
-  >
+  <section class="items-center">
     <Grid cols={2} md={2} gap={12} lgGap={20} class="items-center">
       <div class="flex flex-col gap-6">
-        <Chip text="Desarrollador Web Full-Stack" />
+        <Animate animation="fade-in" duration="500ms">
+          <Chip text="Desarrollador Web Full-Stack" />
+        </Animate>
 
-        <h1
-          class="text-4xl font-bold tracking-tight text-neutral-800 dark:text-white sm:text-6xl"
-        >
-          Hola, soy Miguel Betzay Dominguez
-        </h1>
+        <Animate animation="fade-in" duration="500ms" delay="200ms">
+          <h1
+            class="text-4xl font-bold tracking-tight text-neutral-800 dark:text-white sm:text-5xl lg:text-6xl"
+          >
+            <span class="block text-xl text-sky-500 sm:text-2xl">Hola, soy</span
+            >
+            <span
+              class="bg-gradient-to-br from-sky-500 to-cyan-400 bg-clip-text text-transparent"
+            >
+              Miguel Betzay Dominguez
+            </span>
+          </h1>
+        </Animate>
 
-        <p class="max-w-prose text-lg text-neutral-600 dark:text-neutral-300">
-          Apasionado por transformar ideas en soluciones web eficientes y
-          elegantes. Bienvenido a mi espacio digital donde la tecnología se
-          encuentra con la creatividad.
-        </p>
+        <Animate animation="fade-in" duration="500ms" delay="400ms">
+          <p class="max-w-prose text-lg text-neutral-600 dark:text-neutral-300">
+            Apasionado por transformar ideas en soluciones web eficientes y
+            elegantes. Bienvenido a mi espacio digital donde la tecnología se
+            encuentra con la creatividad.
+          </p>
+        </Animate>
 
-        <div class="mt-4 flex flex-wrap gap-4">
-          <Button href="/proyectos" text="Ver mis proyectos" />
-          <Button
-            href="/contacto"
-            text="Contactarme"
-            variant="secondary"
-            iconName="mdi:arrow-right"
-          />
-        </div>
+        <Animate animation="fade-in-up" duration="500ms" delay="600ms">
+          <div class="mt-4 flex flex-col gap-6 sm:flex-row sm:items-center">
+            <div class="flex flex-wrap gap-4">
+              <Button
+                href="/proyectos"
+                text="Ver mis proyectos"
+                iconName="mdi:briefcase-outline"
+              />
+              <Button
+                href="/contacto"
+                text="Contactarme"
+                variant="secondary"
+                iconName="mdi:arrow-right"
+              />
+            </div>
+          </div>
+        </Animate>
       </div>
 
-      <div class="relative hidden md:block">
+      <Animate
+        animation="fade-in"
+        duration="800ms"
+        delay="300ms"
+        class="relative hidden md:block"
+      >
         <div
-          class="absolute inset-0 z-0 -translate-x-4 translate-y-4 rounded-3xl bg-gradient-to-br from-sky-600 to-cyan-800 opacity-30 blur-3xl"
+          class="absolute inset-0 z-0 -translate-x-4 translate-y-4 rounded-3xl bg-gradient-to-br from-sky-600 to-cyan-800 opacity-20 blur-3xl transition-opacity duration-500 group-hover:opacity-40"
         >
         </div>
         <Image
           src="/images/codeAvatar.png"
           alt="Avatar de Miguel Betzay Dominguez"
-          class="relative z-10 h-auto w-full max-w-sm rounded-3xl object-cover shadow-2xl"
+          class="relative z-10 h-auto w-full max-w-sm rounded-3xl object-cover shadow-2xl transition-transform duration-500 ease-out hover:scale-105"
           width="400"
           height="400"
         />
-      </div>
+      </Animate>
     </Grid>
-  </Animate>
+  </section>
 </Layout>
+
+<style>
+  /* Estilo opcional para que la animación del título sea más dramática */
+  h1 span:last-child {
+    -webkit-text-fill-color: transparent; /* Safari */
+  }
+</style>
