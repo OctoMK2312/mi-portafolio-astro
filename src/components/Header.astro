@@ -2,7 +2,7 @@
 const navLinks = [
   { href: "/proyectos", text: "Proyectos", disabled: true },
   { href: "/sobre-mi", text: "Sobre Mí", disabled: false },
-  { href: "/contacto", text: "Contacto", disabled: true },
+  { href: "/contacto", text: "Contacto", disabled: false },
 ];
 
 const pathname = Astro.url.pathname;
@@ -17,7 +17,7 @@ const pathname = Astro.url.pathname;
         href="/"
         class="group text-xl font-bold text-neutral-900 transition-colors duration-300 hover:text-sky-500 dark:text-neutral-100 dark:hover:text-sky-400"
       >
-        Miguel Betzay Dominguez Diaz
+        MBD Web Development
         <span
           class="block h-0.5 max-w-0 bg-sky-500 transition-all duration-500 group-hover:max-w-full dark:bg-sky-400"
         ></span>

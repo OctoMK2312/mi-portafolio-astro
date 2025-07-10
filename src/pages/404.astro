@@ -1,0 +1,34 @@
+---
+import Layout from "../layouts/layout.astro";
+import Animate from "../components/Animate.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<Layout
+  title="Página no encontrada | 404"
+  description="Lo sentimos, la página que buscas no existe o ha sido movida."
+>
+  <section
+    class="flex min-h-[70vh] flex-col items-center justify-center gap-8 px-6 py-24 text-center"
+  >
+    <Animate animation="fade-in-up" duration="800ms">
+      <h1 class="text-8xl font-bold text-sky-500 sm:text-9xl">404</h1>
+      <h2
+        class="mt-4 text-3xl font-bold tracking-tight text-neutral-800 dark:text-white sm:text-4xl"
+      >
+        Página no encontrada
+      </h2>
+      <p class="mt-4 max-w-md text-lg text-neutral-600 dark:text-neutral-300">
+        Lo sentimos, pero la página que intentas visitar no existe o ha sido
+        movida a otra ubicación.
+      </p>
+      <a
+        href="/"
+        class="mt-8 inline-flex items-center gap-2 rounded-lg bg-sky-600 px-6 py-3 font-semibold text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
+      >
+        <Icon name="mdi:arrow-left" class="h-5 w-5" />
+        <span>Volver al inicio</span>
+      </a>
+    </Animate>
+  </section>
+</Layout>
