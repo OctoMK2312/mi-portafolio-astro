@@ -118,7 +118,7 @@ const myValues = [
           class="relative hidden h-full min-h-[480px] md:block"
         >
           <div
-            class="absolute inset-0 z-0 -translate-x-4 translate-y-4 rounded-3xl bg-gradient-to-br from-sky-600 to-cyan-800 opacity-20 blur-3xl"
+            class="absolute inset-0 z-0 -translate-x-4 translate-y-4 rounded-3xl bg-gradient-to-br from-sky-600 to-cyan-800 opacity-20 blur-3xl transition-opacity duration-500 group-hover:opacity-40"
           >
           </div>
           <Image
@@ -127,6 +127,7 @@ const myValues = [
             class="relative z-10 h-auto w-full max-w-sm rounded-3xl object-cover shadow-2xl"
             width="400"
             height="400"
+            loading="lazy"
           />
         </Animate>
       </Grid>

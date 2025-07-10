@@ -1,2 +1,32 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 @import "./animations.css";
+
+.sun-icon,
+.moon-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.sun-icon {
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+}
+.moon-icon {
+  transform: rotate(90deg) scale(0);
+  opacity: 0;
+}
+
+
+.dark .sun-icon {
+  transform: rotate(-90deg) scale(0);
+  opacity: 0;
+}
+.dark .moon-icon {
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+}
