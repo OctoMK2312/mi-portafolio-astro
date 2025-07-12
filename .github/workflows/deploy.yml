@@ -20,7 +20,6 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      # --- MIRA LA CORRECCIÓN AQUÍ ---
       - name: 3. Install Dependencies and Build
         run: |
           npm install
