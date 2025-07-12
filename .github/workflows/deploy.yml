@@ -20,11 +20,16 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      # --- MIRA LA CORRECCIÓN AQUÍ ---
       - name: 3. Install Dependencies and Build
         run: |
           npm install
-          npm run build # Este comando ejecuta 'astro build'
-
+          npm run build
+        env: # 'env' está indentado dentro de este paso
+          PUBLIC_RECAPTCHA_V3_SITE_KEY: ${{ secrets.PUBLIC_RECAPTCHA_V3_SITE_KEY }}
+          PUBLIC_CONTACT_EMAIL: ${{ secrets.PUBLIC_CONTACT_EMAIL }}
+          CONTACT_EMAIL_TO: ${{ secrets.CONTACT_EMAIL_TO }}
+      
       - name: 4. Deploy to Debian Server
         uses: easingthemes/ssh-deploy@v5.0.0
         with:
@@ -33,6 +38,4 @@ jobs:
           SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          
-          # ¡Asegúrate que este sea el mismo directorio que configuraste en Apache!
-          TARGET: "/var/www/mi-astro-app"
+          TARGET: "/var/www/html"
