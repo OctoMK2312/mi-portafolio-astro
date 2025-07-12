@@ -1,0 +1,38 @@
+# .github/workflows/deploy.yml
+name: Build and Deploy Astro Site
+
+on:
+  push:
+    branches:
+      - main # O la rama que uses para producción
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 2. Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 3. Install Dependencies and Build
+        run: |
+          npm install
+          npm run build # Este comando ejecuta 'astro build'
+
+      - name: 4. Deploy to Debian Server
+        uses: easingthemes/ssh-deploy@v5.0.0
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rlgoDzvc -i --delete"
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          
+          # ¡Asegúrate que este sea el mismo directorio que configuraste en Apache!
+          TARGET: "/var/www/mi-astro-app"
