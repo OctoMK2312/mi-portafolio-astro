@@ -4,7 +4,7 @@ name: Build and Deploy Astro Site
 on:
   push:
     branches:
-      - main # O la rama que uses para producción
+      - master # O la rama que uses para producción
 
 jobs:
   deploy:
