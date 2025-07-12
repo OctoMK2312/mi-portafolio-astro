@@ -1,0 +1,57 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  email: string;
+  class?: string;
+}
+
+const { email, class: containerClass } = Astro.props;
+---
+
+<div
+  class:list={[
+    "email-copy-container",
+    "flex items-center gap-4",
+    containerClass,
+  ]}
+>
+  <a
+    href={`mailto:${email}`}
+    class="inline-flex items-center gap-2 font-medium text-sky-600 transition hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-500"
+  >
+    <Icon name="mdi:email-outline" class="h-5 w-5" />
+    <span>{email}</span>
+  </a>
+  <button
+    class="copy-email-btn rounded-full bg-neutral-100 p-2.5 text-neutral-600 transition hover:bg-sky-100 hover:text-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-sky-900/50 dark:hover:text-sky-400 dark:focus:ring-offset-neutral-800"
+    aria-label="Copiar correo electrónico"
+    data-email-to-copy={email}
+  >
+    <Icon name="mdi:content-copy" class="h-5 w-5" />
+  </button>
+</div>
+
+<script>
+  document.querySelectorAll(".email-copy-container").forEach((container) => {
+    const copyBtn = container.querySelector(
+      ".copy-email-btn"
+    ) as HTMLButtonElement | null;
+    if (!copyBtn || (copyBtn as any)._isInitialized) return;
+    (copyBtn as any)._isInitialized = true;
+
+    const emailToCopy = copyBtn.dataset.emailToCopy;
+
+    copyBtn.addEventListener("click", async () => {
+      if (!emailToCopy) return;
+      await navigator.clipboard.writeText(emailToCopy);
+      const originalIcon = copyBtn.innerHTML;
+      copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="h-5 w-5 text-green-500"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19L21 7l-1.41-1.41z"/></svg>`;
+      copyBtn.disabled = true;
+      setTimeout(() => {
+        copyBtn.innerHTML = originalIcon;
+        copyBtn.disabled = false;
+      }, 2000);
+    });
+  });
+</script>

@@ -4,6 +4,9 @@ import Animate from "../components/Animate.astro";
 import Grid from "../components/Grid.astro";
 import Chip from "../components/Chip.astro";
 import { Icon } from "astro-icon/components";
+import EmailLink from "../components/EmailLink.astro";
+
+const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL;
 
 const socialLinks = [
   {
@@ -115,22 +118,7 @@ const socialLinks = [
                 Puedes contactarme directamente a través de mi correo
                 electrónico.
               </p>
-              <div class="mt-4 flex items-center gap-4">
-                <a
-                  href="mailto:al221910421@gmail.com"
-                  class="inline-flex items-center gap-2 font-medium text-sky-600 transition hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-500"
-                >
-                  <Icon name="mdi:email-outline" class="h-5 w-5" />
-                  <span>al221910421@gmail.com</span>
-                </a>
-                <button
-                  id="copy-email-btn"
-                  aria-label="Copiar correo electrónico"
-                  class="rounded-full bg-neutral-100 p-2.5 text-neutral-600 transition hover:bg-sky-100 hover:text-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-sky-900/50 dark:hover:text-sky-400 dark:focus:ring-offset-neutral-800"
-                >
-                  <Icon name="mdi:content-copy" class="h-5 w-5" />
-                </button>
-              </div>
+              <EmailLink email={contactEmail} class="mt-4" />
             </div>
           </div>
 
@@ -163,34 +151,4 @@ const socialLinks = [
       </Grid>
     </div>
   </section>
-  <script>
-    const copyBtn = document.getElementById(
-      "copy-email-btn"
-    ) as HTMLButtonElement | null;
-    const emailToCopy = "al221910421@gmail.com";
-
-    async function copyEmail() {
-      if (!copyBtn) return;
-
-      try {
-        await navigator.clipboard.writeText(emailToCopy);
-
-        const originalIcon = copyBtn.innerHTML;
-        copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="h-5 w-5 text-green-500"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19L21 7l-1.41-1.41z"/></svg>`;
-        copyBtn.setAttribute("aria-label", "Correo copiado!");
-        copyBtn.disabled = true;
-
-        setTimeout(() => {
-          copyBtn.innerHTML = originalIcon;
-          copyBtn.setAttribute("aria-label", "Copiar correo electrónico");
-          copyBtn.disabled = false;
-        }, 2000);
-      } catch (err) {
-        console.error("Error al copiar el correo: ", err);
-        copyBtn.setAttribute("aria-label", "Error al copiar");
-      }
-    }
-
-    copyBtn?.addEventListener("click", copyEmail);
-  </script>
 </Layout>

@@ -1,7 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-
-const myEmail = "al221910421@gmail.com";
+import EmailLink from "./EmailLink.astro";
 
 const socialLinks = [
   {
@@ -38,44 +37,15 @@ const currentYear = new Date().getFullYear();
           Contacto
         </h3>
         <div class="flex items-center justify-start gap-6 md:justify-end">
-          <div id="email-container" class="relative flex items-center">
-            <span
-              id="email-text"
-              class="mr-3 text-neutral-600 dark:text-neutral-400"
-            >
-              {myEmail}
-            </span>
-            <button
-              id="copy-button"
-              class="group relative rounded-full bg-neutral-200 p-2 text-neutral-600 transition hover:bg-neutral-300 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700"
-              aria-label="Copiar correo"
-            >
-              <span
-                id="copy-feedback"
-                class="pointer-events-none absolute right-full top-1/2 mr-2 -translate-y-1/2 whitespace-nowrap rounded-md bg-neutral-800 px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-neutral-700"
-              >
-                Copiado!
-              </span>
-              <Icon
-                id="copy-icon"
-                name="mdi:content-copy"
-                class="h-5 w-5 transition-transform duration-300 group-active:scale-90"
-              />
-              <Icon
-                id="success-icon"
-                name="mdi:check-circle-outline"
-                class="absolute inset-0 m-auto h-5 w-5 scale-0 text-sky-500 transition-transform duration-300"
-              />
-            </button>
-          </div>
+          <EmailLink email={import.meta.env.PUBLIC_CONTACT_EMAIL} />
           {
             socialLinks.map((link) => (
               <a
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-neutral-500 transition duration-300 hover:scale-110 hover:text-sky-500 dark:text-neutral-400 dark:hover:text-sky-400"
-                aria-label={link.label}
+                class="rounded-full p-3 text-neutral-600 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-sky-100 hover:text-sky-600 dark:text-neutral-300 dark:hover:bg-sky-900/20 dark:hover:text-sky-400"
+                aria-label={`Visita mi perfil de ${link.label}`}
               >
                 <Icon name={link.icon} class="h-7 w-7" />
               </a>
@@ -84,45 +54,13 @@ const currentYear = new Date().getFullYear();
         </div>
       </div>
     </div>
+  </div>
 
-    <div
-      class="mt-12 border-t border-neutral-200 pt-8 text-center text-sm text-neutral-500 dark:border-neutral-800 dark:text-neutral-500"
-    >
-      <p>
-        &copy; {currentYear} Miguel Betzay Dominguez Diaz. Todos los derechos reservados.
-      </p>
-    </div>
+  <div
+    class="mt-12 border-t border-neutral-200 pt-8 text-center text-sm text-neutral-500 dark:border-neutral-800 dark:text-neutral-500"
+  >
+    <p>
+      &copy; {currentYear} Miguel Betzay Dominguez Diaz. Todos los derechos reservados.
+    </p>
   </div>
 </footer>
-
-<script define:vars={{ myEmail }}>
-  const copyButton = document.getElementById("copy-button");
-  const emailContainer = document.getElementById("email-container");
-
-  if (copyButton && emailContainer) {
-    const copyIcon = document.getElementById("copy-icon");
-    const successIcon = document.getElementById("success-icon");
-    const copyFeedback = document.getElementById("copy-feedback");
-
-    copyButton.addEventListener("click", () => {
-      navigator.clipboard
-        .writeText(myEmail)
-        .then(() => {
-          // Mostrar feedback visual
-          copyIcon.style.transform = "scale(0)";
-          successIcon.style.transform = "scale(1)";
-          copyFeedback.style.opacity = "1";
-
-          // Resetear después de 2 segundos
-          setTimeout(() => {
-            copyIcon.style.transform = "scale(1)";
-            successIcon.style.transform = "scale(0)";
-            copyFeedback.style.opacity = "0";
-          }, 2000);
-        })
-        .catch((err) => {
-          console.error("Error al copiar el correo: ", err);
-        });
-    });
-  }
-</script>
