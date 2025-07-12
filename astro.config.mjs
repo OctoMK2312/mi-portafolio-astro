@@ -8,9 +8,7 @@ import icon from "astro-icon";
 
 import react from "@astrojs/react";
 
-// https://astro.build/config
 export default defineConfig({
-  // Reemplaza con el dominio final de tu sitio web
   site: "https://www.portafolio-mbd.xyz",
   vite: {
     plugins: [tailwindcss()],
