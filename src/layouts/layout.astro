@@ -14,6 +14,8 @@ const {
   title = "Título por defecto",
   description = "Descripción por defecto de mi sitio web.",
 } = Astro.props;
+
+const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_V3_SITE_KEY;
 ---
 
 <!doctype html>
@@ -29,6 +31,16 @@ const {
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    {
+      recaptchaSiteKey && (
+        <script
+          src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}
+          async
+          defer
+        />
+      )
+    }
 
     <script is:inline>
       const getTheme = () => {

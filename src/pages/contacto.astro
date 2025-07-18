@@ -5,6 +5,7 @@ import Grid from "../components/Grid.astro";
 import Chip from "../components/Chip.astro";
 import { Icon } from "astro-icon/components";
 import EmailLink from "../components/EmailLink.astro";
+import ContactForm from "../components/ContactForm.tsx";
 
 const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL;
 
@@ -42,68 +43,7 @@ const socialLinks = [
     <div class="mt-16">
       <Grid cols={1} lg={2} gap={12} class="items-start">
         <Animate animation="fade-in-up" duration="800ms" delay="200ms">
-          <form
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            data-netlify-honeypot="bot-field"
-            class="flex flex-col gap-6 rounded-xl border border-neutral-200 bg-white p-8 shadow-sm dark:border-neutral-700 dark:bg-neutral-800"
-          >
-            <input type="hidden" name="form-name" value="contact" />
-            <p class="hidden">
-              <label>
-                No llenes esto si eres humano: <input name="bot-field" />
-              </label>
-            </p>
-            <div>
-              <label
-                for="name"
-                class="mb-2 block font-medium text-neutral-700 dark:text-neutral-200"
-                >Nombre</label
-              >
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                class="w-full rounded-lg border-neutral-300 bg-neutral-50 p-3 text-neutral-800 transition focus:border-sky-500 focus:ring-sky-500 dark:border-neutral-600 dark:bg-neutral-700 dark:text-white"
-              />
-            </div>
-            <div>
-              <label
-                for="email"
-                class="mb-2 block font-medium text-neutral-700 dark:text-neutral-200"
-                >Correo Electrónico</label
-              >
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                class="w-full rounded-lg border-neutral-300 bg-neutral-50 p-3 text-neutral-800 transition focus:border-sky-500 focus:ring-sky-500 dark:border-neutral-600 dark:bg-neutral-700 dark:text-white"
-              />
-            </div>
-            <div>
-              <label
-                for="message"
-                class="mb-2 block font-medium text-neutral-700 dark:text-neutral-200"
-                >Mensaje</label
-              >
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                required
-                class="w-full rounded-lg border-neutral-300 bg-neutral-50 p-3 text-neutral-800 transition focus:border-sky-500 focus:ring-sky-500 dark:border-neutral-600 dark:bg-neutral-700 dark:text-white"
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              class="w-full rounded-lg bg-sky-600 px-6 py-3 font-semibold text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
-            >
-              Enviar Mensaje
-            </button>
-          </form>
+          <ContactForm client:load />
         </Animate>
 
         <Animate animation="fade-in-up" duration="800ms" delay="400ms">
