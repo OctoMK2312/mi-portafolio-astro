@@ -2,7 +2,7 @@
 declare const grecaptcha: any;
 
 const siteKey = import.meta.env.PUBLIC_RECAPTCHA_V3_SITE_KEY;
-const apiUrl = import.meta.env.PUBLIC_API_URL;
+const apiUrl = import.meta.env.PUBLIC_LARAVEL_API_URL;
 
 interface ContactFormData {
   name: string;
