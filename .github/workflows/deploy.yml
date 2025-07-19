@@ -27,7 +27,7 @@ jobs:
         env: # 'env' está indentado dentro de este paso
           PUBLIC_RECAPTCHA_V3_SITE_KEY: ${{ secrets.PUBLIC_RECAPTCHA_V3_SITE_KEY }}
           PUBLIC_CONTACT_EMAIL: ${{ secrets.PUBLIC_CONTACT_EMAIL }}
-          LARAVEL_API_URL: ${{ secrets.LARAVEL_API_URL }}
+          PUBLIC_LARAVEL_API_URL: ${{ secrets.LARAVEL_API_URL }}
           CONTACT_EMAIL_TO: ${{ secrets.CONTACT_EMAIL_TO }}
 
       - name: 4. Deploy to Debian Server
