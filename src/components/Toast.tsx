@@ -23,10 +23,10 @@ export default function Toast({ message, type, onClose }: ToastProps) {
   }, [onClose]);
 
   const baseClasses =
-    "fixed top-5 right-5 z-50 flex animate-fade-in-down items-center gap-4 rounded-lg border p-4 text-neutral-900 shadow-lg backdrop-blur-lg dark:text-neutral-100";
+    "fixed top-5 left-1/2 z-50 flex w-11/12 max-w-sm -translate-x-1/2 animate-fade-in-down items-center gap-4 rounded-lg border p-4 text-neutral-900 shadow-lg backdrop-blur-lg dark:text-neutral-100 sm:left-auto sm:right-5 sm:w-auto sm:translate-x-0";
   const typeClasses =
     type === "success"
-      ? "bg-green-400/30 border-green-500/40"
+      ? "bg-sky-400/30 border-sky-500/40"
       : "bg-red-400/30 border-red-500/40";
 
   const toastContent = (
