@@ -1,0 +1,63 @@
+---
+import Layout from "../layouts/layout.astro";
+import TimeLine from "../components/TimeLine.astro";
+
+const workHistory = [
+  {
+    date: "Mayo 2023 - Actualidad",
+    title: "Desarrollador Full-Stack",
+    company: "Hidroperforaciones CEVAL",
+    description:
+      "Desarrollo y gestión de un ERP para proyectos de perforación (Laravel, MySQL, React JS).",
+  },
+  {
+    date: "Enero 2023 - Mayo 2023",
+    title: "Desarrollador Full-Stack",
+    company: "CIFO Technologies",
+    description:
+      "Diseño y desarrollo de plataforma para encuestas psicométricas (Laravel, MySQL, React JS).",
+  },
+  {
+    date: "Junio 2022 - Enero 2023",
+    title: "Desarrollador Web Full-Stack",
+    company: "Universidad Tecnológica del Valle de Toluca",
+    description:
+      "Creación de aplicaciones web para gestión académica: acceso, horarios y eventos (Laravel, MySQL, React JS).",
+  },
+  {
+    date: "Enero 2021 - Mayo 2021",
+    title: "Desarrollador Full-Stack",
+    company: "Universidad Estatal del Valle de Toluca",
+    description:
+      "Desarrollo de sistema de gestión para clínica universitaria (Laravel, MySQL).",
+  },
+];
+---
+
+<Layout
+  title="Historial Laboral - Mi Portafolio"
+  description="Historial laboral y experiencia profesional de Miguel Domínguez."
+>
+  <main class="container mx-auto">
+    <h1 class="text-4xl font-bold text-center mb-12 animate-fade-in-down">
+      Historial Laboral
+    </h1>
+
+    <div class="relative wrap overflow-hidden p-10 h-full">
+      <div
+        class="border-2-2 absolute border-opacity-20 border-gray-700 dark:border-gray-300 h-full border"
+        style="left: 50%"
+      >
+      </div>
+      {
+        workHistory.map((job, index) => (
+          <TimeLine
+            item={job}
+            isLeft={index % 2 !== 0}
+            animationDelay={`${index * 200}ms`}
+          />
+        ))
+      }
+    </div>
+  </main>
+</Layout>
